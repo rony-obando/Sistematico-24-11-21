@@ -38,10 +38,8 @@ namespace Infraestructura.Models
             }
             else
             {
-                List<decimal> PrincTotal = (from c in prestamos select c.Principal).ToList();
-                List<decimal> InterTotal = (from c in prestamos select c.Interes).ToList();
-                t.TotalPrincipal = PrincTotal.Sum();
-                t.TotalInteres = InterTotal.Sum();
+                t.TotalPrincipal = prestamos.Sum(c=>c.Principal)+t.Principal;
+                t.TotalInteres = prestamos.Sum(c=>c.Interes)+t.Interes;
             }
             prestamos.Add(t);
         }
